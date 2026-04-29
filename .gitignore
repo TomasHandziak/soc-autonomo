@@ -1,0 +1,26 @@
+# Entorno - NUNCA subir credenciales
+.env
+*.env.local
+
+# Java / Maven
+target/
+*.jar
+*.class
+.idea/
+*.iml
+.gradle/
+
+# Python
+__pycache__/
+*.pyc
+
+# Docker
+.dockerignore
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
