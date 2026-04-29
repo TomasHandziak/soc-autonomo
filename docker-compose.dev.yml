@@ -1,0 +1,105 @@
+# ═══════════════════════════════════════════════════════════
+# docker-compose.dev.yml
+# Entorno de DESARROLLO — Solo dependencias (Wazuh + n8n)
+# El backend corre en IntelliJ, NO está incluido acá
+# Uso: docker compose -f docker-compose.dev.yml up -d
+# ═══════════════════════════════════════════════════════════
+
+services:
+
+  wazuh.indexer:
+    image: wazuh/wazuh-indexer:4.7.3
+    container_name: wazuh-indexer
+    restart: unless-stopped
+    ports:
+      - "9200:9200"
+    environment:
+      - "OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m"
+      - network.host=0.0.0.0
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+    volumes:
+      - wazuh-indexer-data:/var/lib/wazuh-indexer
+      - ./wazuh/indexer/opensearch.yml:/usr/share/wazuh-indexer/opensearch.yml
+      - ./wazuh/indexer/certs/:/usr/share/wazuh-indexer/certs/
+    networks:
+      - soc-network
+
+  wazuh.manager:
+    image: wazuh/wazuh-manager:4.7.3
+    container_name: wazuh-manager
+    restart: unless-stopped
+    ports:
+      - "1514:1514/udp"
+      - "1515:1515"
+      - "55000:55000"
+    environment:
+      - INDEXER_URL=https://wazuh.indexer:9200
+      - INDEXER_USERNAME=admin
+      - INDEXER_PASSWORD=${WAZUH_INDEXER_PASSWORD}
+      - FILEBEAT_SSL_VERIFICATION_MODE=none
+    volumes:
+      - wazuh-manager-data:/var/ossec/data
+      - wazuh-manager-logs:/var/ossec/logs
+      - wazuh-manager-etc:/var/ossec/etc
+      - ./wazuh/manager/ossec.conf:/wazuh-config-mount/etc/ossec.conf
+    depends_on:
+      - wazuh.indexer
+    networks:
+      - soc-network
+
+  wazuh.dashboard:
+    image: wazuh/wazuh-dashboard:4.7.3
+    container_name: wazuh-dashboard
+    restart: unless-stopped
+    ports:
+      - "443:5601"
+    environment:
+      - INDEXER_USERNAME=admin
+      - INDEXER_PASSWORD=${WAZUH_INDEXER_PASSWORD}
+      - WAZUH_API_URL=https://wazuh.manager
+      - DASHBOARD_USERNAME=kibanaserver
+      - DASHBOARD_PASSWORD=${WAZUH_DASHBOARD_PASSWORD}
+    volumes:
+      - ./wazuh/dashboard/opensearch_dashboards.yml:/usr/share/wazuh-dashboard/config/opensearch_dashboards.yml
+      - ./wazuh/dashboard/certs/:/usr/share/wazuh-dashboard/certs/
+    depends_on:
+      - wazuh.indexer
+      - wazuh.manager
+    networks:
+      - soc-network
+
+  n8n:
+    image: n8nio/n8n:latest
+    container_name: n8n-soar
+    restart: unless-stopped
+    ports:
+      - "5678:5678"
+    environment:
+      - N8N_BASIC_AUTH_ACTIVE=true
+      - N8N_BASIC_AUTH_USER=${N8N_BASIC_AUTH_USER}
+      - N8N_BASIC_AUTH_PASSWORD=${N8N_BASIC_AUTH_PASSWORD}
+      - N8N_HOST=localhost
+      - N8N_PORT=5678
+      - N8N_PROTOCOL=http
+      - WEBHOOK_URL=http://localhost:5678
+    volumes:
+      - n8n-data:/home/node/.n8n
+    networks:
+      - soc-network
+
+networks:
+  soc-network:
+    driver: bridge
+
+volumes:
+  wazuh-indexer-data:
+  wazuh-manager-data:
+  wazuh-manager-logs:
+  wazuh-manager-etc:
+  n8n-data:
