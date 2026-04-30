@@ -3,7 +3,7 @@ server.port: 5601
 opensearch.hosts: https://wazuh.indexer:9200
 opensearch.ssl.verificationMode: none
 opensearch.username: kibanaserver
-opensearch.password: ${WAZUH_DASHBOARD_PASSWORD}
+opensearch.password: Wazuh@SOC2025
 opensearch.requestHeadersAllowlist:
   - authorization
   - securitytenant
