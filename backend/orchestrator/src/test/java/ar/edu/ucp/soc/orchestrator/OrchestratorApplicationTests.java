@@ -1,10 +1,10 @@
-package ar.edu.ucp.soc.soc.orchestrator;
+package ar.edu.ucp.soc.orchestrator;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ApplicationTests {
+class OrchestratorApplicationTests {
 
 	@Test
 	void contextLoads() {

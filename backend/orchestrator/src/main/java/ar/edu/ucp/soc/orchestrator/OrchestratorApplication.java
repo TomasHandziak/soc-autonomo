@@ -1,13 +1,13 @@
-package ar.edu.ucp.soc.soc.orchestrator;
+package ar.edu.ucp.soc.orchestrator;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class Application {
+public class OrchestratorApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(Application.class, args);
+		SpringApplication.run(OrchestratorApplication.class, args);
 	}
 
 }

@@ -2,7 +2,6 @@ spring:
   application:
     name: soc-orchestrator
 
-  # Base de datos H2 (desarrollo)
   datasource:
     url: jdbc:h2:mem:socdb
     driver-class-name: org.h2.Driver
@@ -18,18 +17,15 @@ spring:
       ddl-auto: create-drop
     show-sql: false
 
-  # Spring AI - Ollama
   ai:
     ollama:
       base-url: ${OLLAMA_URL:http://localhost:11434}
       chat:
         model: ${OLLAMA_MODEL:soc-analyst}
 
-# Servidor
 server:
   port: 8080
 
-# Actuator
 management:
   endpoints:
     web:
@@ -39,7 +35,6 @@ management:
     health:
       show-details: always
 
-# Variables del sistema SOC
 soc:
   wazuh:
     indexer-url: ${WAZUH_INDEXER_URL:https://localhost:9200}
@@ -55,7 +50,6 @@ soc:
     webhook-critica: ${SOAR_WEBHOOK_CRITICA:http://localhost:5678/webhook/alerta-critica}
     webhook-fp: ${SOAR_WEBHOOK_FP:http://localhost:5678/webhook/cierre-fp}
 
-# Logging
 logging:
   level:
     ar.edu.ucp.soc: DEBUG
