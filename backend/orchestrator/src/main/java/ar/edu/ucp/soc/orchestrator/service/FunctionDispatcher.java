@@ -2,6 +2,7 @@ package ar.edu.ucp.soc.orchestrator.service;
 
 import ar.edu.ucp.soc.orchestrator.client.AbuseIPDBClient;
 import ar.edu.ucp.soc.orchestrator.client.VirusTotalClient;
+import ar.edu.ucp.soc.orchestrator.client.WazuhIndexerClient;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +17,7 @@ public class FunctionDispatcher {
     private final VirusTotalClient virusTotalClient;
     private final AbuseIPDBClient abuseIPDBClient;
     private final MitreAttackService mitreAttackService;
+    private final WazuhIndexerClient wazuhIndexerClient;
     private final ObjectMapper objectMapper;
 
     public String ejecutar(String respuestaLLM) {
@@ -52,22 +54,26 @@ public class FunctionDispatcher {
                     yield mitreAttackService.buscarTecnica(query);
                 }
                 case "buscar_logs_historicos" -> {
-                    // Placeholder hasta implementar WazuhIndexerClient
                     String hostname = parametros != null && parametros.has("hostname") ?
-                            parametros.get("hostname").asText() : "desconocido";
-                    yield "Búsqueda de logs históricos para " + hostname +
-                            ": funcionalidad pendiente de implementación (Sprint 3).";
+                            parametros.get("hostname").asText() : "";
+                    String eventId = parametros != null && parametros.has("event_id") ?
+                            parametros.get("event_id").asText() : null;
+                    int rangoHoras = parametros != null && parametros.has("rango_horas") ?
+                            parametros.get("rango_horas").asInt() : 24;
+                    if (hostname.isBlank()) yield "Error: hostname no proporcionado";
+                    yield wazuhIndexerClient.buscarLogsHistoricos(hostname, eventId, rangoHoras);
                 }
                 case "buscar_alertas_previas" -> {
-                    String agentId = parametros != null && parametros.has("agent_id") ?
-                            parametros.get("agent_id").asText() : "desconocido";
-                    yield "Búsqueda de alertas previas para agente " + agentId +
-                            ": funcionalidad pendiente de implementación (Sprint 3).";
+                    String hostname = parametros != null && parametros.has("hostname") ?
+                            parametros.get("hostname").asText() : "";
+                    int rangoHoras = parametros != null && parametros.has("rango_horas") ?
+                            parametros.get("rango_horas").asInt() : 24;
+                    if (hostname.isBlank()) yield "Error: hostname no proporcionado";
+                    yield wazuhIndexerClient.buscarLogsHistoricos(hostname, null, rangoHoras);
                 }
                 default -> "Herramienta desconocida: " + herramienta +
-                        ". Herramientas disponibles: consultar_virustotal, " +
-                        "consultar_abuseipdb, buscar_tactica_mitre, " +
-                        "buscar_logs_historicos, buscar_alertas_previas.";
+                        ". Disponibles: consultar_virustotal, consultar_abuseipdb, " +
+                        "buscar_tactica_mitre, buscar_logs_historicos, buscar_alertas_previas.";
             };
 
         } catch (Exception e) {
