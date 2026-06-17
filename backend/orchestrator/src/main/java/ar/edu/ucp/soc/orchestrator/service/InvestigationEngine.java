@@ -22,6 +22,7 @@ public class InvestigationEngine {
     private final SystemPromptLoader systemPromptLoader;
     private final InvestigacionRepository investigacionRepository;
     private final ObjectMapper objectMapper;
+    private final FunctionDispatcher functionDispatcher;
 
     private static final int MAX_ITERACIONES = 5;
 
@@ -30,7 +31,6 @@ public class InvestigationEngine {
         log.info("Iniciando investigación | id={} | agente={} | regla={}",
                 investigacion.getId(), alerta.getAgentName(), alerta.getRuleName());
 
-        // Cambiar estado a EN_INVESTIGACION
         investigacion.setEstado(Investigacion.Estado.EN_INVESTIGACION);
         investigacionRepository.save(investigacion);
 
@@ -44,7 +44,6 @@ public class InvestigationEngine {
                 iteracion++;
                 log.info("Iteración {} de {} | id={}", iteracion, MAX_ITERACIONES, investigacion.getId());
 
-                // Llamar al LLM
                 String respuestaLLM = ollamaClient.chat(
                         systemPromptLoader.getSystemPrompt(),
                         mensajeActual
@@ -56,38 +55,38 @@ public class InvestigationEngine {
 
                 log.debug("Respuesta LLM iteración {}: {}", iteracion, respuestaLLM);
 
-                // Parsear la respuesta
                 String accion = extraerAccion(respuestaLLM);
 
                 if ("VEREDICTO_FINAL".equals(accion)) {
-                    // El LLM emitió su veredicto
                     VeredictoIA veredicto = parsearVeredicto(respuestaLLM);
-                    return cerrarInvestigacion(investigacion, veredicto, historial.toString(), inicio, iteracion);
+                    return cerrarInvestigacion(investigacion, veredicto,
+                            historial.toString(), inicio, iteracion);
 
                 } else if ("USAR_HERRAMIENTA".equals(accion)) {
-                    // El LLM necesita más información
-                    String resultadoHerramienta = ejecutarHerramienta(respuestaLLM);
+                    // Ahora usa el FunctionDispatcher real
+                    String resultadoHerramienta = functionDispatcher.ejecutar(respuestaLLM);
+                    log.info("Herramienta ejecutada | resultado={}", resultadoHerramienta);
                     mensajeActual = "Resultado de la herramienta: " + resultadoHerramienta +
                             "\n\nContinuá el análisis con esta información adicional.";
 
                 } else {
-                    // Respuesta inesperada, intentar parsear como veredicto
-                    log.warn("Formato inesperado en iteración {}, intentando parsear como veredicto", iteracion);
+                    log.warn("Formato inesperado en iteración {}", iteracion);
                     mensajeActual = "Tu respuesta anterior no siguió el formato JSON requerido. " +
-                            "Respondé con {\"accion\": \"VEREDICTO_FINAL\", ...} o {\"accion\": \"USAR_HERRAMIENTA\", ...}";
+                            "Respondé con {\"accion\": \"VEREDICTO_FINAL\", ...} " +
+                            "o {\"accion\": \"USAR_HERRAMIENTA\", ...}";
                 }
             }
 
-            // Se agotaron las iteraciones sin veredicto
             log.warn("Se agotaron las iteraciones | id={}", investigacion.getId());
             VeredictoIA veredictoDefault = VeredictoIA.builder()
                     .clasificacion(VeredictoIA.Clasificacion.NECESITA_REVISION_HUMANA)
                     .confianza(0)
-                    .explicacion("Se agotaron las iteraciones máximas sin emitir veredicto. Revisión humana requerida.")
+                    .explicacion("Se agotaron las iteraciones máximas. Revisión humana requerida.")
                     .requiereRevisionHumana(true)
                     .build();
 
-            return cerrarInvestigacion(investigacion, veredictoDefault, historial.toString(), inicio, iteracion);
+            return cerrarInvestigacion(investigacion, veredictoDefault,
+                    historial.toString(), inicio, iteracion);
 
         } catch (Exception e) {
             log.error("Error durante la investigación | id={}", investigacion.getId(), e);
@@ -124,7 +123,6 @@ public class InvestigationEngine {
 
     private String extraerAccion(String respuestaLLM) {
         try {
-            // Limpiar posibles markdown code blocks
             String json = respuestaLLM.trim()
                     .replace("```json", "")
                     .replace("```", "")
@@ -133,23 +131,6 @@ public class InvestigationEngine {
             return nodo.get("accion") != null ? nodo.get("accion").asText() : "DESCONOCIDO";
         } catch (Exception e) {
             return "DESCONOCIDO";
-        }
-    }
-
-    private String ejecutarHerramienta(String respuestaLLM) {
-        // Por ahora devuelve un placeholder
-        // En el próximo paso conectamos las herramientas reales (VT, AbuseIPDB, Wazuh)
-        try {
-            String json = respuestaLLM.trim()
-                    .replace("```json", "").replace("```", "").trim();
-            var nodo = objectMapper.readTree(json);
-            String herramienta = nodo.get("herramienta") != null ?
-                    nodo.get("herramienta").asText() : "desconocida";
-
-            log.info("Herramienta solicitada: {} (placeholder por ahora)", herramienta);
-            return "Herramienta " + herramienta + " ejecutada. Sin datos adicionales disponibles por el momento.";
-        } catch (Exception e) {
-            return "Error ejecutando herramienta.";
         }
     }
 
@@ -162,9 +143,12 @@ public class InvestigationEngine {
             return VeredictoIA.builder()
                     .clasificacion(VeredictoIA.Clasificacion.valueOf(
                             nodo.get("clasificacion") != null ?
-                                    nodo.get("clasificacion").asText() : "NECESITA_REVISION_HUMANA"))
-                    .confianza(nodo.get("confianza") != null ? nodo.get("confianza").asInt() : 50)
-                    .explicacion(nodo.get("explicacion") != null ? nodo.get("explicacion").asText() : "")
+                                    nodo.get("clasificacion").asText() :
+                                    "NECESITA_REVISION_HUMANA"))
+                    .confianza(nodo.get("confianza") != null ?
+                            nodo.get("confianza").asInt() : 50)
+                    .explicacion(nodo.get("explicacion") != null ?
+                            nodo.get("explicacion").asText() : "")
                     .accionRecomendada(nodo.get("accion_recomendada") != null ?
                             nodo.get("accion_recomendada").asText() : "")
                     .requiereRevisionHumana(false)
@@ -193,7 +177,6 @@ public class InvestigationEngine {
         inv.setDuracionMs(System.currentTimeMillis() - inicio);
         inv.setTimestampVeredicto(LocalDateTime.now());
 
-        // Determinar estado final según clasificación
         if (veredicto.getClasificacion() == VeredictoIA.Clasificacion.FALSO_POSITIVO) {
             inv.setEstado(Investigacion.Estado.CERRADA_FALSO_POSITIVO);
         } else if (veredicto.getClasificacion() == VeredictoIA.Clasificacion.NECESITA_REVISION_HUMANA) {

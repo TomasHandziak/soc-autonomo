@@ -49,6 +49,11 @@ soc:
   soar:
     webhook-critica: ${SOAR_WEBHOOK_CRITICA:http://localhost:5678/webhook/alerta-critica}
     webhook-fp: ${SOAR_WEBHOOK_FP:http://localhost:5678/webhook/cierre-fp}
+  cti:
+    virustotal:
+      api-key: ${VIRUSTOTAL_API_KEY:eb29f00cc9eca8c66060d64f9260c2788ec97d58b1e135ceb797c706462603f3}
+    abuseipdb:
+      api-key: ${ABUSEIPDB_API_KEY:111c6288e6e09729fc064e493badf5b94c12dd26b6b748711c8374f0a599baec13feda1b3856f031}
 
 logging:
   level:
