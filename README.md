@@ -5,6 +5,7 @@ Sistema de Inteligencia Artificial Agéntica para automatización del triaje de 
 ## Autores
 - Tomás Handziak — Ciberseguridad / IA
 - Manuel Zielinski — Backend
+- Todos los commits fueron realizados en conjunto durante el cursado en la Universidad bajo el mismo usuario de TomasHandziak, dentro de esta cuenta de github.
 
 **Universidad de la Cuenca del Plata — Ingeniería en Sistemas — Tesis Final 2025**
 
