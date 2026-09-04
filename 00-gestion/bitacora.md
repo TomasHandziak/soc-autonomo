@@ -16,7 +16,7 @@
 
 **2 - Alternativas y criterio de descarte.** No aplica -- esta entrada ejecuta lo ya decidido en la entrada del 01/09/2026 (guia de diez preguntas y validacion por opinion del referente).
 
-**3 - Evidencia.** Reunion por Google Meet, viernes 04/09/2026, con transcripcion automatica habilitada y consentimiento explicito grabado al inicio (das consentimiento para que transcriba esta entrevista y la use como fuente en mi trabajo? -- Si, si, totalmente, tenes mi consentimiento, dale nomas.). Invitacion de calendario aceptada por Gabriel Latorre (glatorreteco@gmail.com), evento Entrevista de Validacion del problema y prototipoV0. Coordinacion previa documentada por chat, explicitando el requisito de fuente primaria y la garantia de anonimato de la organizacion y del entrevistado. Transcripcion completa conservada como evidencia (Portafolio Digital, 01-relevamiento).
+**3 - Evidencia.** Reunion por Google Meet, viernes 04/09/2026, Invitacion de calendario aceptada por Gabriel Latorre (glatorreteco@gmail.com), evento Entrevista de Validacion del problema y prototipoV0. Coordinacion previa documentada por chat, explicitando el requisito de fuente primaria y la garantia de anonimato de la organizacion y del entrevistado.
 
 Hallazgos relevantes para el Capitulo I y el Capitulo II:
 - Triage manual: entre 5 y 20 minutos por alerta segun complejidad; casos cerrados en aproximadamente 24 horas si el cliente responde con rapidez. Confirma, con matiz de rango superior, la linea de base ya relevada por autoobservacion (5-15 minutos).
@@ -31,13 +31,77 @@ Hallazgos relevantes para el Capitulo I y el Capitulo II:
 
 Validacion del prototipo v0: se compartio pantalla y se recorrio la maqueta de Figma. El referente comprendio el flujo (SIEM -> agente -> analista o disparo de playbook en el SOAR), pregunto puntualmente por el registro de auditoria de las alertas descartadas (confirmado: el razonamiento del agente queda logueado para revision posterior) y por el criterio de mapeo hacia el playbook correspondiente. Devolucion final registrada textualmente: Para mi la logica cierra bien [...] Por mi parte esta aprobado.
 
-**4 - Aporte personal.** Tomas condujo la entrevista, compartio pantalla para la validacion del prototipo y coordino la logistica de la reunion (invitacion de calendario, consentimiento grabado). [Participacion de Manuel en esta sesion: pendiente de confirmar -- no consta en la transcripcion disponible.]
+**4 - Aporte personal.** Tomas condujo la entrevista, compartio pantalla para la validacion del prototipo y coordino la logistica de la reunion (invitacion de calendario). 
 
 **5 - Desacuerdo.** No aplica a esta entrada.
 
-**6 - Herramienta auxiliar.** Grabacion y transcripcion automatica mediante Google Meet.
+**6 - Herramienta auxiliar.** Google Meet.
 
 > **Nota de consistencia pendiente de resolver.** El referente describe una dotacion de ocho analistas en tres turnos (3 manana, 3 tarde, 1 noche) mas un especialista, cifra que difiere de la registrada previamente por autoobservacion (seis analistas, dos turnos). Se prioriza el dato del referente por tratarse de fuente primaria declarada, pero se deja pendiente la conciliacion explicita antes de la redaccion final del Capitulo I. El referente tambien se refirio a Tomas como lider del equipo en el mismo pasaje -- a confirmar si corresponde ajustar la descripcion del rol de Tomas en el Instrumento 1 y en el apartado I.1.
+
+---
+
+04/09/2026, 11:00 AM -- Actualizacion del Informe Grupal: reemplazo de Adecco 2024 por la Guia Salarial Argentina 2025
+
+1 - Decision. Se reemplaza la Guia de Sueldos de Bumeran (utilizada como correccion intermedia tras descartar la Guia Salarial de Adecco 2024) por la Guia Salarial Argentina 2025 de Adecco, publicada en diciembre de 2025, que discrimina por primera vez un costo de referencia propio para el rol de Especialista en Ciberseguridad por region y tamano de empresa.
+
+2 - Alternativas y criterio de descarte. Se evaluo (a) mantener Bumeran, descartada porque su categoria "Tecnologia y Sistemas" no discrimina por rol y dejaba sin cifra propia al perfil de Analista SOC/ciberseguridad; (b) la Guia Salarial de Adecco 2024, descartada previamente por enlace no vigente y por antiguedad del dato (dos anos respecto de la entrega); (c) la Guia Salarial Argentina 2025 de Adecco, adoptada, por ofrecer una cifra especifica para Especialista en Ciberseguridad desagregada por region (NEA/NOA frente a CABA/AMBA) y tamano de empresa, cumpliendo con mayor precision la regla de las tres preguntas que una categoria agregada.
+
+3 - Evidencia. Guia Salarial Argentina 2025, Adecco Argentina, diciembre de 2025: rango de $2.933.930 a $4.250.685 mensuales brutos para Especialista en Ciberseguridad, region NEA/NOA, empresa grande (frente a $3.495.615-$5.327.220 en CABA/AMBA para el mismo puesto); rango de $2.722.834 a $3.309.412 para Desarrollador Backend, misma region y tamano de empresa.
+
+4 - Aporte personal. Zielinski identifico la fuente, extrajo las tablas correspondientes a Especialista en Ciberseguridad y Desarrollador Backend, y actualizo los apartados 4.2, 4.3 y la bibliografia del Informe Grupal.
+
+5 - Desacuerdo. Ninguno registrado en esta entrada.
+
+6 - Herramienta auxiliar. Ninguna.
+
+---
+
+04/09/2026 09:00 AM -- Tercera reunion del Informe Grupal: implicancias decisorias, registro de decisiones y cierre del documento
+
+1 - Decision. Redactar las implicancias decisorias (4.6), registrar los desacuerdos del proceso con atribucion nominal (6) y la declaracion de produccion comun (7), y consolidar la version final del documento en el Google Doc compartido.
+
+2 - Alternativas y criterio de descarte. Sobre el registro de desacuerdos (6), se evaluo omitir los desacuerdos menores del proceso frente a documentarlos con atribucion nominal conforme exige la consigna de la catedra; se opto por documentarlos.
+
+3 - Evidencia. Tercera reunion de trabajo, 03/09/2026, modalidad virtual. En esta sesion se reemplaza tambien la Guia Salarial de Adecco 2024 (enlace no vigente, dato de 2024) por la Guia de Sueldos de Bumeran (marzo de 2026) en los apartados 4.2 y 4.3, como correccion intermedia, posteriormente actualizada el 04/09 (ver entrada correspondiente).
+
+4 - Aporte personal. Zielinski redacto 4.6, 6 y 7, y consolido la version final del documento. Handziak reviso la coherencia de 4.3-4.5 con la version consolidada.
+
+5 - Desacuerdo. Se registran, con atribucion nominal en el apartado 6 del Informe Grupal, dos desacuerdos: (a) si derivar una cifra salarial ajustada a partir del ISC2 Cybersecurity Workforce Study 2025 o mantenerlo como evidencia exclusivamente cualitativa, resuelto a favor de esto ultimo; (b) si el perfil mas critico de cubrir era el de orquestacion de agentes de IA o el de analista SOC/Wazuh, resuelto por consenso a favor del primero.
+
+6 - Herramienta auxiliar. Ninguna.
+
+---
+
+04/09/2026 00:00 -- Segunda reunion del Informe Grupal: perfiles, marco promocional y articulacion regional
+
+1 - Decision. Redactar la disponibilidad de perfiles y costos de referencia (4.3), el marco promocional aplicable -Ley N.o 27.506- (4.4) y las instituciones de articulacion regional (4.5), y reemplazar las fuentes iniciales del apartado 4.2 por otras de mayor especificidad para el proyecto.
+
+2 - Alternativas y criterio de descarte. Se evaluo mantener el reporte OPSSI-CESSI y la encuesta Sysarmy/Openqube como fuentes del piso salarial general, descartadas por no permitir aislar una cifra propia del rubro de ciberseguridad; se adoptaron el 2025 ISC2 Cybersecurity Workforce Study y el relevamiento de exportaciones de Argencon. Sobre las instituciones de articulacion regional, se evaluo citar a Silicon Misiones, descartada por no contar con informacion verificable y actualizada sobre empresas asociadas; se adopto el Polo TIC Misiones, con padron de empresas propio y consultable.
+
+3 - Evidencia. 2025 ISC2 Cybersecurity Workforce Study (diciembre de 2025); relevamiento de exportaciones de la Economia del Conocimiento a marzo de 2026 (Argencon, difundido por Perfil); padron de empresas asociadas del Polo TIC Misiones.
+
+4 - Aporte personal. Handziak redacto 4.3, 4.4 y 4.5, aportando la perspectiva de campo del contacto directo con el MSSP. Zielinski identifico y reemplazo las fuentes del apartado 4.2 (ISC2, Argencon, Polo TIC).
+
+5 - Desacuerdo. Ninguno registrado en esta entrada.
+
+6 - Herramienta auxiliar. Ninguna.
+
+---
+
+03/09/2026 20:00 hs -- Primera reunion del Informe Grupal de Encuadre Comun en la Universidad de la Cuenca del Plata: reparto de apartados y primer borrador. Debido a la incertidumbre sobre cómo hacer el trabajo debido a la falta de otro grupo disponible, se ha comenzado el trabajo grupal este día, una vez ya consultado a los profesores sobre la manera en la cual se trabajaría en este apartado.
+
+1 - Decision. Dividir el trabajo del Informe Grupal por apartados, conforme al Instrumento 2, y redactar un primer borrador de la delimitacion del sector (4.1) y las fuentes iniciales del apartado 4.2.
+
+2 - Alternativas y criterio de descarte. Se evaluo delimitar el sector de los recursos mediante una definicion de las actividades que incluye, descartada por prestarse a ambiguedad frente a actividades colindantes del MSSP (seguridad fisica, telecomunicaciones); se adopto una delimitacion por exclusion explicita de esas tres actividades.
+
+3 - Evidencia. Google Doc creado y compartido entre ambos coautores. Primera reunion de trabajo, 01/09/2026, modalidad virtual.
+
+4 - Aporte personal. Zielinski, responsable de la carga, propuso la division de apartados (4.1, 4.2, 4.6, 6 y 7 para si; 4.3, 4.4 y 4.5 para Handziak, en funcion de su contacto directo con el MSSP) y redacto el primer borrador de 4.1. Handziak confirmo el reparto y aporto el listado inicial de perfiles a relevar para el apartado 4.3.
+
+5 - Desacuerdo. Ninguno registrado en esta entrada.
+
+6 - Herramienta auxiliar. Ninguna.
 
 ---
 
