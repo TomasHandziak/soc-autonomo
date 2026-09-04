@@ -105,6 +105,21 @@ Validacion del prototipo v0: se compartio pantalla y se recorrio la maqueta de F
 
 ---
 
+04/09/2026 17:00 PM -- Reorganizacion de la estructura de carpetas del repositorio
+
+1 - Decision. Reorganizar el repositorio conforme a la convencion numerada de la catedra, creando las carpetas de primer nivel 00-gestion, 01-relevamiento, 02-analisis, 03-requisitos, 04-diseno y 05-entregas, y consolidando la totalidad del codigo y la infraestructura bajo src/.
+
+2 - Alternativas y criterio de descarte. Se evaluo mantener los archivos de infraestructura de Wazuh (wazuh-docker-4.7.3, con sus certificados y configuraciones de indexer/manager/dashboard) en la raiz del repositorio, tal como se habian subido originalmente; se descarto porque mezclaba codigo de infraestructura de terceros con los entregables propios de la catedra en el mismo nivel, dificultando ubicar la evidencia por instrumento. Se adopto moverlo integramente bajo src/, dejando la raiz reservada a la convencion numerica exigida.
+
+3 - Evidencia. Commit 76cbc19: crea las seis carpetas de primer nivel (con archivo .gitkeep en las que aun no tienen contenido propio), agrega src/backend/.env.example y src/backend/orchestrator.zip, crea la estructura de docs/ (adr, architecture, security/ollama, security/soar, tests/benchmark), y mueve la totalidad de wazuh-docker-4.7.3 -certificados, configuraciones y scripts de despliegue incluidos- de la raiz del repositorio a src/wazuh-docker-4.7.3/.
+
+4 - Aporte personal. Zielinski realizo la reorganizacion completa de la estructura de carpetas y el movimiento de los archivos de infraestructura.
+
+5 - Desacuerdo. Ninguno registrado en esta entrada.
+
+6 - Herramienta auxiliar. Git, para el movimiento y registro de los archivos reorganizados.
+
+---
 ### 01/09/2026 -- Guia de entrevista al referente y metodo de validacion del prototipo v0
 
 **1 - Decision.** Se adopta la guia final de preguntas para la entrevista con el referente del MSSP (segunda fuente primaria exigida por el Dictamen Tecnico N.o 02/2026), y se define el metodo de validacion del prototipo v0: que el referente lo evalue dando su opinion en la misma reunion de la entrevista, en lugar de una validacion exclusivamente por laboratorio.
