@@ -12,6 +12,37 @@
 
 ---
 
+### 04/09/2026 — Entrevista con el referente y validación del prototipo v0
+
+**1 · Decisión.** Se ejecuta la entrevista de visión de negocio con Gabriel Latorre (referente del MSSP, segunda fuente primaria exigida por el Dictamen Técnico N.º 02/2026) y se valida el prototipo v0 en la misma reunión, conforme al método acordado con el docente tutor y el ayudante José Luis Medina.
+
+**2 · Alternativas y criterio de descarte.** No aplica — esta entrada ejecuta lo ya decidido en la entrada del 01/09/2026 (guía de diez preguntas y validación por opinión del referente).
+
+**3 · Evidencia.** Reunión por Google Meet, viernes 04/09/2026, con transcripción automática habilitada y consentimiento explícito grabado al inicio ("¿das consentimiento para que transcriba esta entrevista y la use como fuente en mi trabajo?" — "Sí, sí, totalmente, tenés mi consentimiento, dale nomás."). Invitación de calendario aceptada por Gabriel Latorre (glatorreteco@gmail.com), evento "Entrevista de Validación del problema y prototipoV0". Coordinación previa documentada por chat, explicitando el requisito de fuente primaria y la garantía de anonimato de la organización y del entrevistado. Transcripción completa conservada como evidencia (Portafolio Digital, 01-relevamiento).
+
+Hallazgos relevantes para el Capítulo I y el Capítulo II:
+- Triage manual: entre 5 y 20 minutos por alerta según complejidad; casos cerrados en aproximadamente 24 horas si el cliente responde con rapidez. Confirma, con matiz de rango superior, la línea de base ya relevada por autoobservación (5-15 minutos).
+- SLA con los 13 clientes: se cumplen, pero atados a la cantidad de reglas y fuentes que cada cliente ingesta al SIEM, no al volumen bruto de alertas; el margen de cumplimiento se sostiene "exigiendo al límite la capacidad de los turnos".
+- Sin reclamos formales ni contratos en riesgo documentados hasta la fecha, aunque el margen de error se reduce con cada cliente nuevo que se suma sin cambios operativos.
+- Historia del problema: escaló progresivamente desde un analista y un cliente hasta la dotación y cartera actual (13 clientes), a medida que creció la operación.
+- Ya se evaluó ampliar dotación de personal como respuesta, pero se reconoce que escalar linealmente por cada cliente nuevo "no es sustentable, ni por costo ni por operación".
+- Solución ya probada: ajuste de umbrales estáticos en las reglas del SIEM; límite reconocido: "hay comportamientos humanos que no se pueden filtrar automáticamente con una regla fija".
+- Dato nuevo no relevado antes: la organización está en transición activa hacia un SOAR con playbooks propios, lo que abre una vía de integración directa para el veredicto del sistema propuesto (disparo automático del playbook correspondiente).
+- Validación explícita de la propuesta: "todo lo que nos ayude a automatizar el triage... es muy bienvenido", con expectativa adicional de integración con el SOAR en desarrollo.
+- Única reserva expresada: cuidar que la automatización no genere falsos negativos, y validar bien la interoperabilidad con el SOAR y los playbooks.
+
+Validación del prototipo v0: se compartió pantalla y se recorrió la maqueta de Figma. El referente comprendió el flujo (SIEM → agente → analista o disparo de playbook en el SOAR), preguntó puntualmente por el registro de auditoría de las alertas descartadas (confirmado: el razonamiento del agente queda logueado para revisión posterior) y por el criterio de mapeo hacia el playbook correspondiente. Devolución final registrada textualmente: "Para mí la lógica cierra bien [...] Por mi parte está aprobado."
+
+**4 · Aporte personal.** Tomás condujo la entrevista, compartió pantalla para la validación del prototipo y coordinó la logística de la reunión (invitación de calendario, consentimiento grabado). [Participación de Manuel en esta sesión: pendiente de confirmar — no consta en la transcripción disponible.]
+
+**5 · Desacuerdo.** No aplica a esta entrada.
+
+**6 · Herramienta auxiliar.** Grabación y transcripción automática mediante Google Meet.
+
+> **Nota de consistencia pendiente de resolver.** El referente describe una dotación de ocho analistas en tres turnos (3 mañana, 3 tarde, 1 noche) más un especialista, cifra que difiere de la registrada previamente por autoobservación (seis analistas, dos turnos). Se prioriza el dato del referente por tratarse de fuente primaria declarada, pero se deja pendiente la conciliación explícita antes de la redacción final del Capítulo I. El referente también se refirió a Tomás como "líder" del equipo en el mismo pasaje — a confirmar si corresponde ajustar la descripción del rol de Tomás en el Instrumento 1 y en el apartado I.1.
+
+---
+
 ### 01/09/2026 — Guía de entrevista al referente y método de validación del prototipo v0
 
 **1 · Decisión.** Se adopta la guía final de preguntas para la entrevista con el referente del MSSP (segunda fuente primaria exigida por el Dictamen Técnico N.º 02/2026), y se define el método de validación del prototipo v0: que el referente lo evalúe dando su opinión en la misma reunión de la entrevista, en lugar de una validación exclusivamente por laboratorio.
@@ -66,7 +97,7 @@
 
 **2 · Alternativas y criterio de descarte.** Se evaluó (a) API cloud (OpenAI/Anthropic), con integración más rápida y mayor capacidad de razonamiento sin infraestructura propia, descartada; (b) LLM local aislado de internet, ejecutado en hardware propio, adoptada. Criterio: con Sysmon ya capturando telemetría real de los endpoints (433 eventos en la primera prueba), enviar esos logs a servidores comerciales de terceros representaba un riesgo de fuga de datos inaceptable para un entorno de seguridad real.
 
-**3 · Evidencia.** InvestigationEngine funcionando de punta a punta (ingesta de alerta, análisis, persistencia) con los datos procesados íntegramente dentro de la infraestructura propia, sin llamadas a servicios externos de IA. Principio de ingeniería invocado: minimización de superficie de exposición de datos (confidencialidad).
+**3 · Evidencia.** InvestigationEngine funcionando de punta a punta (ingesta de alerta, análisis, persistencia) con los datos procesados íntegramente dentro de la infraestructura propia, sin llamadas a servicios externos de IA. Principio de ingeniería invocado: m��k?nemización de superficie de exposición de datos (confidencialidad).
 
 **4 · Aporte personal.** Manuel modeló las entidades de dominio AlertEvent, VeredictoIA, Investigacion y FunctionCall (commit fe64e9e, `src/backend/orchestrator/src/main/java/ar/edu/ucp/soc/orchestrator/model/`) y construyó el pipeline AlertService + InvestigacionRepository (commit 751282d). Tomás instaló y configuró Sysmon y el Wazuh Agent, obteniendo la captura de los 433 eventos (commit aedea12, `.env.example`). Manuel realizó la integración de OllamaClient (commit b74c382, `src/backend/orchestrator/src/main/java/ar/edu/ucp/soc/orchestrator/client/OllamaClient.java`) y, tras identificar el riesgo de OPSEC, el InvestigationEngine y el ajuste del SystemPrompt (commit b96b2aa, `src/backend/orchestrator/src/main/java/ar/edu/ucp/soc/orchestrator/service/InvestigationEngine.java` y `src/backend/orchestrator/src/main/resources/system_prompt.txt`).
 
@@ -86,7 +117,7 @@
 
 **4 · Aporte personal.** La decisión de la arquitectura del backend - adopción de Spring Boot y diseño de capas— fue realizada íntegramente por Manuel. Tomás generó el esqueleto inicial del proyecto con Spring Initializr y lo ejecutó sobre su máquina (commits 6bc2511, a06dbe4 y bae0bde, `src/backend/orchestrator/pom.xml` y `src/backend/orchestrator/src/main/resources/application.yaml`).
 
-**5 · Desacuerdo.** Tomás impulsaba Python por estar el ecosistema de IA construido mayormente sobre ese lenguaje. Manuel sostuvo Java con Spring Boot, con el argumento de que el corazón del sistema era el pipeline de datos y no la IA en sí. Se aplicó la matriz de decisión del Acta de Constitución, comparando ambas opciones por mantenibilidad y ajuste al dominio del problema; no hizo falta el desempate de Manuel porque, al mostrar cómo Spring Data JPA resolvía de forma tipada la interacción con H2, Tomás acordó con el criterio de Manuel.
+**5 · Desacuerdo.** Tomás impulsaba Python por estar el ecosistema de IA construido mayormente sobre ese lenguaje. Manuel sostuvo Java con Spring Boot, con el argumento de que el coraz�>n del sistema era el pipeline de datos y no la IA en sí. Se aplicó la matriz de decisión del Acta de Constitución, comparando ambas opciones por mantenibilidad y ajuste al dominio del problema; no hizo falta el desempate de Manuel porque, al mostrar cómo Spring Data JPA resolvía de forma tipada la interacción con H2, Tomás acordó con el criterio de Manuel.
 
 **6 · Herramienta auxiliar.** Spring Initializr, para generar el esqueleto del proyecto con las dependencias exactas (Web, JPA, H2, Ollama, Actuator).
 
