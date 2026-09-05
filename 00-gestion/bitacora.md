@@ -47,7 +47,7 @@ Validacion del prototipo v0: se compartio pantalla y se recorrio la maqueta de F
 
 2 - Alternativas y criterio de descarte. Se evaluo (a) mantener Bumeran, descartada porque su categoria "Tecnologia y Sistemas" no discrimina por rol y dejaba sin cifra propia al perfil de Analista SOC/ciberseguridad; (b) la Guia Salarial de Adecco 2024, descartada previamente por enlace no vigente y por antiguedad del dato (dos anos respecto de la entrega); (c) la Guia Salarial Argentina 2025 de Adecco, adoptada, por ofrecer una cifra especifica para Especialista en Ciberseguridad desagregada por region (NEA/NOA frente a CABA/AMBA) y tamano de empresa, cumpliendo con mayor precision la regla de las tres preguntas que una categoria agregada.
 
-3 - Evidencia. Guia Salarial Argentina 2025, Adecco Argentina, diciembre de 2025: rango de $2.933.930 a $4.250.685 mensuales brutos para Especialista en Ciberseguridad, region NEA/NOA, empresa grande (frente a $3.495.615-$5.327.220 en CABA/AMBA para el mismo puesto); rango de $2.722.834 a $3.309.412 para Desarrollador Backend, misma region y tamano de empresa.
+3 - Evidencia. Guia Salarial Argentina 2025, Adecco Argentina, diciembre de 2025: rango de $2.933.930 a $4.250.685 mensuales brutos para Especialista en Ciberseguridad, region NEA/NOA, empresa grande (frente a $3.495.615-$5.327.220 en CABA/AMBA para el mismo puesto); rango de $2.722.834 a $3.309.412 para Desarrollador Backend, misma region y tamano de empresa. Reflejado en la versión final del Informe Grupal (apartado 4.2, 4.3 y bibliografía): Bumeran ya no figura en el documento.
 
 4 - Aporte personal. Zielinski identifico la fuente, extrajo las tablas correspondientes a Especialista en Ciberseguridad y Desarrollador Backend, y actualizo los apartados 4.2, 4.3 y la bibliografia del Informe Grupal.
 
@@ -61,13 +61,13 @@ Validacion del prototipo v0: se compartio pantalla y se recorrio la maqueta de F
 
 1 - Decision. Redactar las implicancias decisorias (4.6), registrar los desacuerdos del proceso con atribucion nominal (6) y la declaracion de produccion comun (7), y consolidar la version final del documento en el Google Doc compartido.
 
-2 - Alternativas y criterio de descarte. Sobre el registro de desacuerdos (6), se evaluo omitir los desacuerdos menores del proceso frente a documentarlos con atribucion nominal conforme exige la consigna de la catedra; se opto por documentarlos.
+2 - Sobre el apartado 6, se evaluó registrar allí todo punto de discusión surgido durante el proceso, incluidos los resueltos por simple consenso, frente a reservar esa tabla exclusivamente a decisiones que hayan requerido comparación estructurada de alternativas conforme al Instrumento 2, punto 2.3; se optó por lo segundo, para no diluir con desacuerdos menores el único registro que sí exigió comparar fuentes con métodos y universos distintos (OPSSI-CESSI frente a Sysarmy/Openqube, 03/09/2026).
 
 3 - Evidencia. Tercera reunion de trabajo, 03/09/2026, modalidad virtual. En esta sesion se reemplaza tambien la Guia Salarial de Adecco 2024 (enlace no vigente, dato de 2024) por la Guia de Sueldos de Bumeran (marzo de 2026) en los apartados 4.2 y 4.3, como correccion intermedia, posteriormente actualizada el 04/09 (ver entrada correspondiente).
 
 4 - Aporte personal. Zielinski redacto 4.6, 6 y 7, y consolido la version final del documento. Handziak reviso la coherencia de 4.3-4.5 con la version consolidada.
 
-5 - Desacuerdo. Se registran, con atribucion nominal en el apartado 6 del Informe Grupal, dos desacuerdos: (a) si derivar una cifra salarial ajustada a partir del ISC2 Cybersecurity Workforce Study 2025 o mantenerlo como evidencia exclusivamente cualitativa, resuelto a favor de esto ultimo; (b) si el perfil mas critico de cubrir era el de orquestacion de agentes de IA o el de analista SOC/Wazuh, resuelto por consenso a favor del primero.
+5 - Desacuerdo. Durante la reunión se discutieron dos puntos, resueltos por consenso sin necesidad de aplicar la matriz de decisión del Acta de Constitución y, por lo tanto, sin entrada propia en el apartado 6: (a) si derivar una cifra salarial ajustada a partir del ISC2 Cybersecurity Workforce Study 2025 o mantenerlo como evidencia exclusivamente cualitativa, resuelto a favor de esto último (reflejado en la columna "Uso" del apartado 4.2); (b) si el perfil más crítico de cubrir era el de orquestación de agentes de IA o el de analista SOC/Wazuh, resuelto por consenso a favor del primero (reflejado en los apartados 4.3 y 4.6). Ninguno de los dos se registra con atribución nominal en el apartado 6 del Informe Grupal, que permanece reservado a la única decisión del 03/09/2026 sobre fuentes del piso salarial general.
 
 6 - Herramienta auxiliar. Ninguna.
 
