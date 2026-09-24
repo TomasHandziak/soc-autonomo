@@ -10,6 +10,22 @@
 
 > **Criterio de resolucion de desacuerdos** (Acta de Constitucion, Instrumento 2, punto 2.3): comparacion estructurada de todos los puntos en discusion, apoyada en diagramas de Venn u otra matriz de decision por criterios ponderados, y validacion conjunta antes de avanzar. Ante empate real persistente, decide en ultima instancia Manuel Zielinski.
 
+### 24/09/2026 -- Extraccion y anonimizacion del reporte de incidentes SIEM (linea de base cuantitativa)
+
+**1 - Decision.** Se incorpora al Portafolio Digital, como evidencia de campo, un extracto real de alertas gestionadas por FortiSIEM correspondiente al 16/09/2026 (24 h, 3882 alertas), utilizado para sostener con un dato verificable la linea de base numerica del Capitulo I y el volumen de alertas citado en el Capitulo II.
+
+**2 - Alternativas y criterio de descarte.** Se evaluo (a) un dia de pico de alertas, que sobrerrepresentaria el problema y sesgaria la linea de base hacia el peor caso, descartada; (b) un promedio semanal agregado, que perderia la trazabilidad a un evento puntual verificable y auditable por el tribunal, descartada; (c) un dia tipico de operacion, sin picos ni incidentes atipicos, adoptada. Criterio: el 16/09/2026 se eligio como dia representativo -sin anomalias operativas ni incidentes de gran escala- precisamente para que el dato sostenga la fatiga de alertas como condicion ordinaria del SOC y no como una excepcion, que es el reclamo que hace el Capitulo I.
+
+**3 - Evidencia.** Extracto exportado manualmente por Tomas desde la consola de FortiSIEM (reporteIncidentes.csv, 3882 filas; columnas Event Receive Time, Event Type, Incident ID, Incident Target, Incident Detail, Event Severity, Case ID). Lectura cuantitativa del dia: 799 alertas de severidad alta/critica -20,6%-, 1111 de severidad media -28,6%-, 0 alertas con Case ID asignado en la ventana completa de 24 h. Version anonimizada (ver punto 6) subida a `01-relevamiento/20260916_ReporteIncidentesSIEM_Anonimizado_v1.csv`.
+
+**4 - Aporte personal.** Tomas ejecuto la extraccion manual desde FortiSIEM y definio el criterio de seleccion del dia, en su caracter de analista del SOC entrevistado como fuente primaria en el Capitulo II. La anonimizacion de los ocho dominios de cliente identificables en el archivo original (aacc, allaria, certificate, acsa-auto, artear, smvsa, sowic, teco) se realizo con asistencia de Claude: reemplazo por identificadores neutros (cliente-01 a cliente-08) preservando la distincion entre clientes -relevante para el caracter multi-tenant del SOC-, con verificacion posterior de que no quedara ningun rastro de los nombres originales ni se corrompiera el campo tecnico no relacionado `certificate[->]private-key`.
+
+**5 - Desacuerdo.** No aplica -- decision individual de Tomas sobre su propia evidencia de campo; no involucra decisiones de arquitectura del sistema compartidas con Manuel.
+
+**6 - Herramienta auxiliar.** Consola de FortiSIEM (exportacion manual) y script en Python (modulo `re`) para la anonimizacion de dominios de cliente, ejecutado y verificado por Claude.
+
+---
+
 ### 04/09/2026 -- Entrevista con el referente y validacion del prototipo v0
 
 **1 - Decision.** Se ejecuta la entrevista de vision de negocio con Gabriel Latorre (referente del MSSP, segunda fuente primaria exigida por el Dictamen Tecnico N.o 02/2026) y se valida el prototipo v0 en la misma reunion, conforme al metodo acordado con el docente tutor y el ayudante Jose Luis Medina.
